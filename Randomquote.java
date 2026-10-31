@@ -1,4 +1,4 @@
-import java.util.Random;
+import java.util.*;
 public class RandomQuote {
     public static void main(String[] args) {
         String[] quotes = {
