@@ -1,0 +1,60 @@
+import java.util.*;
+
+public class FitnessTracker {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int totalSteps = 0;
+        int totalCalories = 0;
+        int totalWorkouts = 0;
+        int dailyGoal = 10000; // steps goal
+
+        System.out.println("--- Fitness Tracker App - CodeAlpha Task ---");
+
+        while (true) {
+            System.out.println("\n1. Add Today's Activity");
+            System.out.println("2. Show Dashboard / Summary");
+            System.out.println("3. Exit");
+            System.out.print("Choose option: ");
+            int option = sc.nextInt();
+
+            if (option == 1) {
+                System.out.print("Enter steps today: ");
+                int steps = sc.nextInt();
+                System.out.print("Enter workouts done (number): ");
+                int workouts = sc.nextInt();
+
+                int calories = (int)(steps * 0.04); // simple formula
+
+                totalSteps += steps;
+                totalWorkouts += workouts;
+                totalCalories += calories;
+
+                System.out.println("Data Saved! Calories Burnt: " + calories);
+            
+            } else if (option == 2) {
+                // Dashboard / Summary Screen
+                System.out.println("\n--- DASHBOARD ---");
+                System.out.println("Total Steps: " + totalSteps);
+                System.out.println("Total Workouts: " + totalWorkouts);
+                System.out.println("Total Calories Burnt: " + totalCalories);
+
+                // Progress Bar logic
+                int progress = (totalSteps * 100) / dailyGoal;
+                if (progress > 100) progress = 100;
+                
+                System.out.println("\nDaily Goal Progress (" + dailyGoal + " steps): " + progress + "%");
+                System.out.print("[");
+                for(int i=0; i< progress/10; i++) System.out.print("=");
+                for(int i=0; i< 10 - progress/10; i++) System.out.print(" ");
+                System.out.println("]");
+
+                System.out.println("\nWeekly Progress: If you continue, you will burn ~" + (totalCalories * 7) + " calories this week");
+
+            } else {
+                System.out.println("App Closed. Data saved in local storage (simulated)");
+                break;
+            }
+        }
+        sc.close();
+    }
+}
